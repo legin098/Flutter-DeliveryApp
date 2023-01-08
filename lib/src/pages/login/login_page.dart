@@ -1,7 +1,9 @@
+import 'package:delivery_app/src/pages/login/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginController con = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,23 +88,25 @@ class LoginPage extends StatelessWidget {
 
   Widget _textFieldEmail() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 40),
-      child: const TextField(
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: TextField(
+        controller: con.emailController,
         keyboardType: TextInputType.emailAddress,
-        decoration:
-            InputDecoration(hintText: 'Email', prefixIcon: Icon(Icons.email)),
+        decoration: const InputDecoration(
+            hintText: 'Email', prefixIcon: Icon(Icons.email)),
       ),
     );
   }
 
   Widget _textFieldPassword() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 40),
-      child: const TextField(
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: TextField(
+        controller: con.passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
-        decoration:
-            InputDecoration(hintText: 'Password', prefixIcon: Icon(Icons.lock)),
+        decoration: const InputDecoration(
+            hintText: 'Password', prefixIcon: Icon(Icons.lock)),
       ),
     );
   }
@@ -112,7 +116,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => con.login(),
           style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12)),
           child: const Text(
@@ -127,19 +131,22 @@ class LoginPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
-        Text(
+      children: <Widget>[
+        const Text(
           'You do not have an account?',
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
         ),
-        SizedBox(
+        const SizedBox(
           width: 7,
         ),
-        Text(
-          'Sign up here',
-          style: TextStyle(
-              color: Colors.amber, fontWeight: FontWeight.bold, fontSize: 16),
+        GestureDetector(
+          onTap: () => con.goToRegisterPage(),
+          child: const Text(
+            'Sign up here',
+            style: TextStyle(
+                color: Colors.amber, fontWeight: FontWeight.bold, fontSize: 16),
+          ),
         )
       ],
     );
