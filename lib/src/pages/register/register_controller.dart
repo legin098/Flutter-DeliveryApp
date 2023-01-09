@@ -1,3 +1,5 @@
+import 'package:delivery_app/src/models/user.dart';
+import 'package:delivery_app/src/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +11,9 @@ class RegisterController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  void register() {
+  UserProvider userProvider = UserProvider();
+
+  void register() async {
     String email = emailController.text.trim();
     String name = nameController.text;
     String lastName = lastNameController.text;
@@ -18,6 +22,17 @@ class RegisterController extends GetxController {
     String confirmPassword = confirmPasswordController.text.trim();
 
     if (isValidForm(email, name, lastName, phone, password, confirmPassword)) {
+      User user = User(
+          email: email,
+          name: name,
+          lastname: lastName,
+          phone: phone,
+          password: password);
+
+      Response response = await userProvider.create(user);
+
+      print("RESPONSE: ${response.body}");
+
       Get.snackbar('Valid form', "Are you ready to send the Http request");
     }
   }
