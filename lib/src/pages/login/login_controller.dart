@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -12,9 +12,6 @@ class LoginController extends GetxController {
   void login() {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
-
-    print('Email: ${email}');
-    print('Password: ${password}');
 
     if (isValidForm(email, password)) {
       Get.snackbar('Valid form', "Are you ready to send the Http request");
