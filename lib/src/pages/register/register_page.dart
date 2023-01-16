@@ -2,14 +2,7 @@ import 'package:delivery_app/src/pages/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
-
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
+class RegisterPage extends StatelessWidget {
   RegisterController con = Get.put(RegisterController());
 
   @override
